@@ -32,6 +32,41 @@
   <!-- Top Festive Marigold (Genda Phool) Garland Bar -->
   <div class="top-festive-garland"></div>
 
+  <!-- Royal Step-by-Step Interactive Guide Bar (Navigation & Guidelines) -->
+  <nav class="royal-guide-bar" aria-label="Wedding Invitation Guide">
+    <div class="royal-guide-container">
+      <div class="guide-label-title">
+        <span>🧭 شاہی رہنمائی • Guide:</span>
+      </div>
+      <div class="guide-steps-scroll" id="guide-steps-scroll">
+        <a href="#step-envelope" class="guide-step-chip active-step" data-target="step-envelope">
+          <span>✉️ 1. Open Envelope</span>
+        </a>
+        <a href="#step-personalize" class="guide-step-chip" data-target="step-personalize">
+          <span>👑 2. Personalize</span>
+        </a>
+        <a href="#step-perspective" class="guide-step-chip" data-target="step-perspective">
+          <span>👥 3. Family Side</span>
+        </a>
+        <a href="#step-scratch" class="guide-step-chip" data-target="step-scratch">
+          <span>🪙 4. Scratch Date</span>
+        </a>
+        <a href="#step-events" class="guide-step-chip" data-target="step-events">
+          <span>📅 5. Ceremonies</span>
+        </a>
+        <a href="#step-dholak" class="guide-step-chip" data-target="step-dholak">
+          <span>🥁 6. Shadi Dholak</span>
+        </a>
+        <a href="#step-joota" class="guide-step-chip" data-target="step-joota">
+          <span>👠 7. Joota Chupai</span>
+        </a>
+        <a href="#step-duas" class="guide-step-chip" data-target="step-duas">
+          <span>🤲 8. Send Dua</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
   <!-- Floating Audio Player (Real Studio Wedding Shehnai & Sitar) -->
   <div class="floating-audio-widget">
     <div class="music-wave-bars" id="music-wave-indicator" title="Wedding Shehnai & Sitar Music Playing">
@@ -51,6 +86,32 @@
       <span>⚙️ Edit Invite Details</span>
     </button>
   </div>
+
+  <!-- Smart Guide Floating Toast (Step-by-Step Live Assistant) -->
+  <aside class="smart-guide-toast" id="smart-guide-toast" role="status" aria-live="polite">
+    <div class="guide-toast-left">
+      <div class="guide-avatar-badge">👑</div>
+      <div class="guide-toast-text">
+        <span class="guide-toast-step" id="guide-toast-step">Step 1 of 8 • مہر توڑیں</span>
+        <p class="guide-toast-msg" id="guide-toast-msg">
+          Oopar 3D Envelope par bani <strong>Wax Seal (مہر)</strong> par tap karein taakay Shahi Dawat-nama khulay!
+        </p>
+      </div>
+    </div>
+    <div class="guide-toast-actions">
+      <button class="btn-guide-next" id="guide-next-btn">
+        <span>Agla Step</span> ➔
+      </button>
+      <button class="btn-guide-close" id="guide-close-btn" title="Close Guide" aria-label="Close Guide">
+        &times;
+      </button>
+    </div>
+  </aside>
+
+  <!-- Re-open Guide Floating Pill -->
+  <button class="guide-reopen-pill" id="guide-reopen-pill">
+    <span>🧭 Open Guide / رہنمائی</span>
+  </button>
 
   <!-- Main Website Content Wrapper -->
   <div class="main-wrapper">
@@ -76,13 +137,16 @@
         <p class="wedding-tagline">Cordially Invite You to Share in the Joy of Their Wedding</p>
 
         <!-- 3D Royal Wax-Sealed Envelope Opening Experience -->
-        <div class="envelope-experience-section">
+        <div class="envelope-experience-section section-guide-target" id="step-envelope">
           <div class="envelope-3d-stage">
             <div class="royal-3d-envelope" id="royal-3d-envelope" title="Click to break the wax seal and open the royal invitation">
               
               <!-- 3D Wax Seal Stamp -->
               <div class="wax-seal-center" id="envelope-wax-seal">
                 <img src="assets/images/royal_wax_seal.jpg" alt="Mughal Royal Wax Seal" />
+                <div class="bouncing-hand-pointer" id="wax-bouncing-pointer">
+                  👆 Tap Seal to Open / مہر پر کلک کریں
+                </div>
               </div>
 
               <!-- 3D Top Flap -->
@@ -127,10 +191,11 @@
     <!-- ==========================================
          PERSONALIZED GUEST WELCOMER TOOL
          ========================================== -->
-    <section class="guest-personalizer-section">
+    <section class="guest-personalizer-section section-guide-target" id="step-personalize">
       <div class="container">
         <div class="guest-personalizer-card" data-3d-tilt>
           <div class="card-glare"></div>
+          <div class="contextual-hint-badge">💡 Step 2: Apna ya apnay khandan ka naam likhein taakay makhsoos card ban sakay!</div>
           <h4>👑 Personalize This Invitation For Your Family</h4>
           <p style="font-size: 0.9rem; color: var(--color-text-muted);">
             Apna ya apnay khandan ka naam likhein taakay aap ka makhsoos Shahi Dawat-nama generate ho sake:
@@ -151,9 +216,13 @@
     <!-- ==========================================
          PERSPECTIVE SWITCHER: GROOM vs BRIDE SIDE
          ========================================== -->
-    <section class="perspective-section" id="invitation-details">
+    <section class="perspective-section section-guide-target" id="step-perspective">
       <div class="container">
         <div class="perspective-container">
+
+          <div style="text-align: center; margin-bottom: 0.75rem;">
+            <div class="contextual-hint-badge">💡 Step 3: Choose family side (Larkay Walay ya Larki Walay) to view customized message</div>
+          </div>
 
           <!-- Perspective Selector Tabs -->
           <div class="side-selector-tabs" role="tablist">
@@ -199,10 +268,11 @@
     <!-- ==========================================
          SIGNATURE SCRATCH CARD: REVEAL WEDDING DATE
          ========================================== -->
-    <section class="scratch-section" id="scratch-date-section">
+    <section class="scratch-section section-guide-target" id="step-scratch">
       <div class="container">
 
         <div class="section-title-wrap">
+          <div class="contextual-hint-badge">💡 Step 4: Card ko ungli ya mouse say rub/scratch karein taakay wedding date reveal ho!</div>
           <p class="section-pretitle">Interactive Royal Reveal</p>
           <h2 class="section-title">✨ Reveal the Auspicious Wedding Dates ✨</h2>
           <p class="section-subtitle">
@@ -249,7 +319,7 @@
             <button class="btn-gold" data-add-calendar="baraat">
               📅 Add to Calendar
             </button>
-            <a href="#duas-section" class="btn-gold">
+            <a href="#step-duas" class="btn-gold">
               💌 Send Mubarakbaad &amp; Dua
             </a>
             <button class="btn-outline-gold" id="scratch-reset-btn">
@@ -299,10 +369,11 @@
     <!-- ==========================================
          3 CORE WEDDING CEREMONIES (EVENTS TIMELINE)
          ========================================== -->
-    <section class="events-section" id="events-schedule">
+    <section class="events-section section-guide-target" id="step-events">
       <div class="container">
 
         <div class="section-title-wrap" style="text-align: center;">
+          <div class="contextual-hint-badge">💡 Step 5: Teeno rasoomat (Mehndi, Baraat, Walima) kay timings, dress codes aur maps check karein</div>
           <p class="section-pretitle">Festivities &amp; Celebrations</p>
           <h2 class="section-title">The Three Grand Ceremonies</h2>
           <p class="section-subtitle">
@@ -443,10 +514,11 @@
     <!-- ==========================================
          INTERACTIVE DHOLAK DRUM STATION (ڈھولک بجائیں)
          ========================================== -->
-    <section class="dholak-section">
+    <section class="dholak-section section-guide-target" id="step-dholak">
       <div class="container">
         <div class="dholak-container-card" data-3d-tilt>
           <div class="card-glare"></div>
+          <div class="contextual-hint-badge">💡 Step 6: 'Luddi' ya 'Bhangra' beat on karein aur drum heads pr tap karein!</div>
           <p class="section-pretitle">Desi Shadi Beats</p>
           <h3 style="font-family: var(--font-serif-royal); font-size: 2rem; color: var(--color-gold-bright); margin-bottom: 0.5rem;">
             🥁 Interactive Shadi Dholak
@@ -481,10 +553,11 @@
     <!-- ==========================================
          JOOTA CHUPAI NEGOTIATOR GAME (جوتا چھپائی فن)
          ========================================== -->
-    <section class="joota-game-section">
+    <section class="joota-game-section section-guide-target" id="step-joota">
       <div class="container">
         <div class="joota-game-card" data-3d-tilt>
           <div class="card-glare"></div>
+          <div class="contextual-hint-badge">💡 Step 7: Slider drag karein aur Dulhan ki Saaliyan vs Dulhe kay Yaar bargaining dialogue dekhein!</div>
           <p class="section-pretitle">Pakistani Shadi Tradition &amp; Fun</p>
           <h3 style="font-family: var(--font-serif-royal); font-size: 1.9rem; color: var(--color-gold-bright);">
             👠 Joota Chupai Negotiator
@@ -517,10 +590,11 @@
     <!-- ==========================================
          MUBARAKBAAD & DUAS WALL (DUAON KA TOHFA)
          ========================================== -->
-    <section class="duas-section" id="duas-section">
+    <section class="duas-section section-guide-target" id="step-duas">
       <div class="container">
 
         <div class="section-title-wrap" style="text-align: center;">
+          <div class="contextual-hint-badge">💡 Step 8: Dulha aur Dulhan kay liye apni Dua &amp; Mubarakbaad WhatsApp pr send karein!</div>
           <p class="section-pretitle">Shadi Mubarakbaad</p>
           <h2 class="section-title">🤲 Mubarakbaad &amp; Duas Wall</h2>
           <p class="section-subtitle">

@@ -104,6 +104,7 @@ class RoyalWeddingApp {
     this.initCustomizerModal();
     this.initCalendarButtons();
     this.initShareButtons();
+    this.initRoyalGuide();
 
     // Initialize 3D scene
     window.addEventListener('DOMContentLoaded', () => {
@@ -749,7 +750,149 @@ class RoyalWeddingApp {
       });
     }
   }
+
+  // Step-by-Step Royal Guide & Interactive Guidelines Controller
+  initRoyalGuide() {
+    const steps = [
+      { id: 'step-envelope', stepNum: 1, label: 'مہر توڑیں (Open Envelope)', msg: 'Oopar 3D Envelope par bani <strong>Wax Seal (مہر)</strong> par tap karein taakay Shahi Dawat-nama khulay!' },
+      { id: 'step-personalize', stepNum: 2, label: 'نام درج کریں (Personalize)', msg: 'Apna ya apnay khandan ka naam likhein taakay aap kay naam ka makhsoos dawat-nama generate ho sake!' },
+      { id: 'step-perspective', stepNum: 3, label: 'خاندان منتخب کریں (Family Side)', msg: "'لڑکے والے' ya 'لڑکی والے' select karein taakay dawat-nama unkay hisaab say update ho!" },
+      { id: 'step-scratch', stepNum: 4, label: 'تاریخ معلوم کریں (Scratch Card)', msg: '24K Gold foil ko ungli ya mouse say rub/scratch karein aur wedding date reveal karein!' },
+      { id: 'step-events', stepNum: 5, label: 'تینوں تقریبات (Ceremonies)', msg: 'Mehndi, Baraat aur Walima kay timings, venues, dress codes aur maps check karein!' },
+      { id: 'step-dholak', stepNum: 6, label: 'شادی ڈھولک (Shadi Dholak)', msg: "'Luddi' ya 'Bhangra' dhol beat on karein aur drum heads par tap karein!" },
+      { id: 'step-joota', stepNum: 7, label: 'جوتا چھپائی (Bargaining Fun)', msg: 'Slider drag karein aur Saaliyan vs Dulhay kay Dost kay mazahiya dialogues dekhein!' },
+      { id: 'step-duas', stepNum: 8, label: 'مبارکباد اور دعا (Duas Wall)', msg: 'Dulha aur Dulhan kay liye apni Dua & Mubarakbaad WhatsApp pr send karein!' }
+    ];
+
+    let currentStepIdx = 0;
+
+    const toast = document.getElementById('smart-guide-toast');
+    const toastStep = document.getElementById('guide-toast-step');
+    const toastMsg = document.getElementById('guide-toast-msg');
+    const nextBtn = document.getElementById('guide-next-btn');
+    const closeBtn = document.getElementById('guide-close-btn');
+    const reopenPill = document.getElementById('guide-reopen-pill');
+    const chips = document.querySelectorAll('.guide-step-chip');
+
+    const updateGuideUI = (idx) => {
+      currentStepIdx = Math.max(0, Math.min(steps.length - 1, idx));
+      const s = steps[currentStepIdx];
+
+      if (toastStep) toastStep.textContent = `Step ${s.stepNum} of ${steps.length} • ${s.label}`;
+      if (toastMsg) toastMsg.innerHTML = s.msg;
+
+      chips.forEach((c) => {
+        c.classList.toggle('active-step', c.dataset.target === s.id);
+      });
+
+      // Auto scroll chip into view in guide bar
+      const activeChip = document.querySelector(`.guide-step-chip[data-target="${s.id}"]`);
+      if (activeChip) {
+        activeChip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
+      if (nextBtn) {
+        if (currentStepIdx === steps.length - 1) {
+          nextBtn.innerHTML = '<span>Complete</span> 🎉';
+        } else {
+          nextBtn.innerHTML = `<span>Step ${currentStepIdx + 2}</span> ➔`;
+        }
+      }
+    };
+
+    const scrollToStep = (idx) => {
+      currentStepIdx = idx;
+      const s = steps[idx];
+      const targetEl = document.getElementById(s.id);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+        targetEl.classList.remove('section-highlighted');
+        void targetEl.offsetWidth; // trigger reflow
+        targetEl.classList.add('section-highlighted');
+      }
+      updateGuideUI(idx);
+    };
+
+    // Chip clicks
+    chips.forEach((chip) => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = chip.dataset.target;
+        const stepIdx = steps.findIndex(s => s.id === targetId);
+        if (stepIdx !== -1) {
+          scrollToStep(stepIdx);
+          if (window.royalAudio) window.royalAudio.playBell();
+        }
+      });
+    });
+
+    // Next step button
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const nextIdx = (currentStepIdx + 1) % steps.length;
+        scrollToStep(nextIdx);
+        if (window.royalAudio) window.royalAudio.playBell();
+      });
+    }
+
+    // Close & Reopen Toast
+    if (closeBtn && toast && reopenPill) {
+      closeBtn.addEventListener('click', () => {
+        toast.classList.add('minimized');
+        reopenPill.classList.add('visible');
+      });
+
+      reopenPill.addEventListener('click', () => {
+        toast.classList.remove('minimized');
+        reopenPill.classList.remove('visible');
+        if (window.royalAudio) window.royalAudio.playBell();
+      });
+    }
+
+    // Scroll spy: auto detect active section in view
+    let isThrottled = false;
+    window.addEventListener('scroll', () => {
+      if (isThrottled) return;
+      isThrottled = true;
+      setTimeout(() => { isThrottled = false; }, 150);
+
+      const scrollPos = window.scrollY + 220;
+      for (let i = steps.length - 1; i >= 0; i--) {
+        const el = document.getElementById(steps[i].id);
+        if (el && el.offsetTop <= scrollPos) {
+          if (currentStepIdx !== i) {
+            updateGuideUI(i);
+          }
+          break;
+        }
+      }
+    });
+
+    // Auto advance when envelope is opened
+    const waxSeal = document.getElementById('envelope-wax-seal');
+    if (waxSeal) {
+      waxSeal.addEventListener('click', () => {
+        const pointer = document.getElementById('wax-bouncing-pointer');
+        if (pointer) pointer.style.display = 'none';
+        setTimeout(() => {
+          updateGuideUI(1);
+        }, 1200);
+      });
+    }
+
+    // Auto advance when scratch card is revealed
+    const oldReveal = this.scratchCard && this.scratchCard.onReveal;
+    if (this.scratchCard) {
+      this.scratchCard.onReveal = () => {
+        if (typeof oldReveal === 'function') oldReveal();
+        setTimeout(() => {
+          updateGuideUI(4);
+        }, 800);
+      };
+    }
+  }
 }
 
 // Global App bootstrap
 window.weddingApp = new RoyalWeddingApp();
+
