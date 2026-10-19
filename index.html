@@ -32,6 +32,9 @@
   <!-- Top Festive Marigold (Genda Phool) Garland Bar -->
   <div class="top-festive-garland"></div>
 
+  <!-- Virtual Rose Petal Shower Falling Layer -->
+  <div id="petal-shower-layer" aria-hidden="true"></div>
+
   <!-- Royal Step-by-Step Interactive Guide Bar (Navigation & Guidelines) -->
   <nav class="royal-guide-bar" aria-label="Wedding Invitation Guide">
     <div class="royal-guide-container">
@@ -63,7 +66,16 @@
         <a href="#step-duas" class="guide-step-chip" data-target="step-duas">
           <span>🤲 8. Send Dua</span>
         </a>
+        <a href="#step-gallery" class="guide-step-chip" data-target="step-gallery">
+          <span>🌸 9. Lookbook</span>
+        </a>
+        <a href="#step-shagun" class="guide-step-chip" data-target="step-shagun">
+          <span>🧧 10. E-Salami</span>
+        </a>
       </div>
+      <button class="btn-gold" id="top-open-agency-btn" onclick="window.weddingApp &amp;&amp; window.weddingApp.openAgencyStudio()" style="flex-shrink: 0; padding: 6px 14px; font-size: 0.82rem; margin-left: 8px; cursor: pointer;" title="Open Agency Studio to customize &amp; export client website">
+        👑 Agency Studio
+      </button>
     </div>
   </nav>
 
@@ -80,10 +92,10 @@
     </button>
   </div>
 
-  <!-- Floating Quick Customizer (Edit Names & Dates) -->
+  <!-- Floating Agency Studio Customizer (Client Config & Theme Switcher) -->
   <div class="floating-settings-widget">
-    <button class="settings-btn" id="open-customizer-btn" title="Customize Names, Dates & WhatsApp">
-      <span>⚙️ Edit Invite Details</span>
+    <button class="settings-btn" id="open-customizer-btn" onclick="window.weddingApp &amp;&amp; window.weddingApp.openAgencyStudio()" title="Agency Studio: Customize Names, Themes, Dates &amp; Export Client Config">
+      <span>👑 Agency Studio</span>
     </button>
   </div>
 
@@ -92,7 +104,7 @@
     <div class="guide-toast-left">
       <div class="guide-avatar-badge">👑</div>
       <div class="guide-toast-text">
-        <span class="guide-toast-step" id="guide-toast-step">Step 1 of 8 • مہر توڑیں</span>
+        <span class="guide-toast-step" id="guide-toast-step">Step 1 of 10 • مہر توڑیں</span>
         <p class="guide-toast-msg" id="guide-toast-msg">
           Oopar 3D Envelope par bani <strong>Wax Seal (مہر)</strong> par tap karein taakay Shahi Dawat-nama khulay!
         </p>
@@ -182,6 +194,16 @@
             <p style="font-size: 0.95rem; color: var(--color-gold-bright);">
               "May Allah bless you, shower His blessings upon you, and unite you both in goodness."
             </p>
+          </div>
+        </div>
+
+        <!-- Virtual Rose Petal Shower & Gulab Pash Interactive Bar -->
+        <div class="hero-petal-bar">
+          <button class="btn-shower-petals" id="hero-petal-shower-btn" type="button" title="Click to shower scented velvet rose petals across the screen!">
+            <span>🌹 پھول نچھاور کریں • Shower Rose Petals</span>
+          </button>
+          <div class="petal-counter-badge" title="Live total of celebratory rose petals showered by guests">
+            <span>🌸 Total Blessings:</span> <span class="petal-count-num" id="live-petal-count">1,348</span> <span>Petals</span>
           </div>
         </div>
 
@@ -663,6 +685,204 @@
     </section>
 
     <!-- ==========================================
+         9. ROYAL MEMORY & LOOKBOOK GALLERY
+         ========================================== -->
+    <section class="gallery-section section-guide-target" id="step-gallery">
+      <div class="container">
+
+        <div class="section-title-wrap" style="text-align: center;">
+          <div class="contextual-hint-badge">💡 Step 9: Shahi Tasweerein dekhein aur har taqreeb kay dress code colors check karein!</div>
+          <p class="section-pretitle">Royal Memories &amp; Attire</p>
+          <h2 class="section-title">🌸 Royal Gallery &amp; Dress Code Lookbook</h2>
+          <p class="section-subtitle">
+            A glimpse into the regal Pakistani celebrations, timeless traditions, and handpicked wedding looks.
+          </p>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid">
+          
+          <!-- Image 1: Couple (Featured Large) -->
+          <div class="gallery-card col-span-8" data-img="assets/images/hero_couple.jpg" data-caption="Hamza &amp; Ayesha • Royal Nuptial Portrait">
+            <img src="assets/images/hero_couple.jpg" alt="Hamza and Ayesha" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-card-urdu">شہزادہ و شہزادی</span>
+              <h4 class="gallery-card-title">Hamza &amp; Ayesha • The Royal Couple</h4>
+              <p class="gallery-card-sub">Serena Islamabad • Click to Zoom</p>
+            </div>
+          </div>
+
+          <!-- Image 2: Mehndi Hands -->
+          <div class="gallery-card col-span-4" data-img="assets/images/mehndi_hands.jpg" data-caption="Rasm-e-Heena • Intricate Bridal Henna &amp; Bangles">
+            <img src="assets/images/mehndi_hands.jpg" alt="Bridal Mehndi Hands" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-card-urdu">رسمِ حنا و چوڑیاں</span>
+              <h4 class="gallery-card-title">Bridal Mehndi Art</h4>
+              <p class="gallery-card-sub">Pure Traditional Elegance</p>
+            </div>
+          </div>
+
+          <!-- Image 3: Sangeet Night -->
+          <div class="gallery-card col-span-4-sub" data-img="assets/images/mehndi_night.jpg" data-caption="Mehndi &amp; Sangeet Night • Dholak Beats &amp; Festive Lights">
+            <img src="assets/images/mehndi_night.jpg" alt="Pakistani Mehndi Night" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-card-urdu">ڈھولک و سنگیت</span>
+              <h4 class="gallery-card-title">Sangeet &amp; Dholak</h4>
+              <p class="gallery-card-sub">Haveli Marquee</p>
+            </div>
+          </div>
+
+          <!-- Image 4: Barat Stage -->
+          <div class="gallery-card col-span-4-sub" data-img="assets/images/baraat_stage.jpg" data-caption="The Grand Baraat Stage • Chandeliers &amp; Crimson Velvet">
+            <img src="assets/images/baraat_stage.jpg" alt="Grand Baraat Stage" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-card-urdu">شاہی بارات کا سٹیج</span>
+              <h4 class="gallery-card-title">The Grand Baraat Stage</h4>
+              <p class="gallery-card-sub">Serena Ballrooms</p>
+            </div>
+          </div>
+
+          <!-- Image 5: Walima Stage -->
+          <div class="gallery-card col-span-4-sub" data-img="assets/images/walima_reception.jpg" data-caption="Walima Reception • Grand Lawns &amp; Champagne Pastels">
+            <img src="assets/images/walima_reception.jpg" alt="Walima Reception Stage" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-card-urdu">دعوتِ ولیمہ محفل</span>
+              <h4 class="gallery-card-title">Walima Grand Lawns</h4>
+              <p class="gallery-card-sub">Islamabad Club</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dress Code Color Swatches Strip -->
+        <div class="lookbook-strip">
+          <div class="lookbook-label">
+            <span>🎨 Auspicious Dress Code Palette:</span>
+          </div>
+
+          <div class="swatch-group">
+            <span style="font-size: 0.82rem; color: var(--color-gold-bright); font-weight: 700;">Mehndi:</span>
+            <div class="swatch-pill" title="Mustard Yellow (#E5A910) - Traditional Haldi">
+              <span class="swatch-dot" style="background: #E5A910;"></span>
+              <span>Mustard (#E5A910)</span>
+            </div>
+            <div class="swatch-pill" title="Peacock Teal (#0A6847) - Sangeet Kurta">
+              <span class="swatch-dot" style="background: #0A6847;"></span>
+              <span>Peacock Teal</span>
+            </div>
+            <div class="swatch-pill" title="Rani Pink (#D81B60) - Festive Choli">
+              <span class="swatch-dot" style="background: #D81B60;"></span>
+              <span>Rani Pink</span>
+            </div>
+          </div>
+
+          <div class="swatch-group">
+            <span style="font-size: 0.82rem; color: var(--color-gold-bright); font-weight: 700;">Baraat:</span>
+            <div class="swatch-pill" title="Royal Crimson (#6E1224) - Bridal Lehenga">
+              <span class="swatch-dot" style="background: #6E1224;"></span>
+              <span>Royal Crimson</span>
+            </div>
+            <div class="swatch-pill" title="Antique 24K Gold (#D4AF37) - Zari Work">
+              <span class="swatch-dot" style="background: #D4AF37;"></span>
+              <span>Zari Gold</span>
+            </div>
+          </div>
+
+          <div class="swatch-group">
+            <span style="font-size: 0.82rem; color: var(--color-gold-bright); font-weight: 700;">Walima:</span>
+            <div class="swatch-pill" title="Champagne Beige (#E6D2B5) - Reception Pastel">
+              <span class="swatch-dot" style="background: #E6D2B5;"></span>
+              <span>Champagne</span>
+            </div>
+            <div class="swatch-pill" title="Midnight Navy (#1B263B) - Classic Tuxedo">
+              <span class="swatch-dot" style="background: #1B263B;"></span>
+              <span>Midnight Navy</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         10. DIGITAL SHAGUN & E-SALAMI LIFAFA
+         ========================================== -->
+    <section class="shagun-section section-guide-target" id="step-shagun">
+      <div class="container">
+        
+        <div class="shagun-lifafa-wrapper" data-3d-tilt>
+          <div class="card-glare"></div>
+
+          <div class="shagun-header-row">
+            <div class="contextual-hint-badge">💡 Step 10: Overseas ya door kay mehmaan yahan say ba-asani salami &amp; shagun bhej saktay hain!</div>
+            <span class="shagun-crest">🧧</span>
+            <h3 class="shagun-title-urdu">شگون و ای-سلامی لفافہ</h3>
+            <h2 class="shagun-title-en">Digital Shagun &amp; E-Salami Lifafa</h2>
+            <p class="shagun-note">
+              For our beloved overseas relatives, distant family members, and friends who wish to bestow blessings and traditional wedding shagun upon the couple digitally:
+            </p>
+          </div>
+
+          <!-- Payment Cards Grid -->
+          <div class="shagun-methods-grid">
+
+            <!-- Method 1: Raast Instant Pay -->
+            <div class="shagun-method-card">
+              <div>
+                <span class="shagun-card-badge raast">⚡ Raast Instant Pay (0% Fee)</span>
+                <p class="shagun-detail-label">Raast ID / Registered Phone</p>
+                <div class="shagun-detail-val" id="shagun-raast-val">0333-2568818</div>
+                <p class="shagun-detail-title">Title: <strong id="shagun-raast-title-val">Muhammad Tariq Khan</strong></p>
+              </div>
+              <button class="btn-copy-shagun" data-copy-target="shagun-raast-val">
+                📋 Copy Raast ID
+              </button>
+            </div>
+
+            <!-- Method 2: JazzCash / EasyPaisa -->
+            <div class="shagun-method-card">
+              <div>
+                <span class="shagun-card-badge jazzcash">📱 Mobile Wallets (EasyPaisa / JazzCash)</span>
+                <p class="shagun-detail-label">Wallet Mobile Number</p>
+                <div class="shagun-detail-val" id="shagun-wallet-val">0333-2568818</div>
+                <p class="shagun-detail-title">Title: <strong id="shagun-wallet-title-val">Hamza Tariq</strong></p>
+              </div>
+              <button class="btn-copy-shagun" data-copy-target="shagun-wallet-val">
+                📋 Copy Mobile Number
+              </button>
+            </div>
+
+            <!-- Method 3: Bank Alfalah / IBAN -->
+            <div class="shagun-method-card">
+              <div>
+                <span class="shagun-card-badge bank">🏦 Bank Alfalah Direct IBAN</span>
+                <p class="shagun-detail-label">IBAN Account Number</p>
+                <div class="shagun-detail-val" id="shagun-iban-val" style="font-size: 0.95rem;">PK64ALFH0001001004812345</div>
+                <p class="shagun-detail-title">Title: <strong id="shagun-bank-title-val">Hamza Tariq (Groom)</strong></p>
+              </div>
+              <button class="btn-copy-shagun" data-copy-target="shagun-iban-val">
+                📋 Copy Bank IBAN
+              </button>
+            </div>
+
+          </div>
+
+          <!-- WhatsApp Salami Receipt Confirmation -->
+          <div class="shagun-whatsapp-row">
+            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 0.75rem;">
+              After sending your Shagun, tap below to send a Mubarakbaad confirmation message to the family:
+            </p>
+            <a href="https://wa.me/923001234567?text=Assalam-o-Alaikum!%20We%20have%20sent%20our%20humble%20Shagun%20/%20Salami%20for%20Hamza%20%26%20Ayesha's%20wedding%20with%20our%20heartiest%20prayers.%20Shadi%20Mubarak!" target="_blank" rel="noopener" class="btn-gold" id="shagun-confirm-wa-btn" style="display: inline-flex; align-items: center; gap: 8px;">
+              💬 Send Salami Confirmation on WhatsApp
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
          SHARE INVITATION LINKS SECTION
          ========================================== -->
     <section class="share-section">
@@ -700,68 +920,395 @@
         <p style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.4);">
           Khan &amp; Siddiqui Families • Islamabad, Pakistan
         </p>
+
+        <!-- Viral Agency Ad & Referral Promo Banner -->
+        <div class="agency-footer-banner" id="agency-footer-banner">
+          <span style="font-size: 1.8rem; display: block; margin-bottom: 0.5rem;">✨ 👑 ✨</span>
+          <h4 id="agency-footer-title">Need a Royal Animated 3D Wedding Website For Your Shadi?</h4>
+          <p id="agency-footer-desc">
+            Impress your guests with 3D envelopes, golden scratch card reveals, interactive Dholak beats, and digital Salami lifafa! Custom branded &amp; delivered in 24 hours.
+          </p>
+          <a href="https://wa.me/923332568818?text=Assalam-o-Alaikum!%20I%20saw%20this%20Royal%20Wedding%20Website%20and%20want%20to%20order%20a%20custom%20website%20for%20my%20wedding.%20Please%20share%20packages%20and%20pricing." target="_blank" rel="noopener" class="btn-gold" id="agency-footer-whatsapp-btn" style="display: inline-flex; align-items: center; gap: 8px;">
+            💬 Order Yours on WhatsApp (Chat With Studio)
+          </a>
+        </div>
+
       </div>
     </footer>
 
   </div>
 
+  <!-- Viral Floating Agency Referral Lead Badge (Collapsible) -->
+  <a href="https://wa.me/923332568818?text=Assalam-o-Alaikum!%20I%20saw%20this%20Royal%20Wedding%20Website%20and%20want%20to%20order%20one.%20Please%20share%20details." target="_blank" rel="noopener" class="agency-referral-float" id="agency-referral-float" title="Order your own Royal Wedding Website on WhatsApp">
+    <span class="agency-float-pulse"></span>
+    <span class="agency-float-text">Want a Wedding Website? <strong>Order on WhatsApp</strong></span>
+  </a>
+
+  <!-- Gallery Lightbox Modal -->
+  <div class="gallery-lightbox" id="gallery-lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Preview">
+    <div class="lightbox-content-box">
+      <button class="lightbox-close-btn" id="lightbox-close-btn" aria-label="Close photo preview">&times;</button>
+      <img src="" alt="" id="lightbox-img" />
+      <p class="lightbox-caption-txt" id="lightbox-caption"></p>
+    </div>
+  </div>
+
   <!-- ==========================================
-       QUICK CUSTOMIZER MODAL (EDIT NAMES & DATES)
+       ROYAL AGENCY STUDIO & CLIENT CONFIGURATOR
        ========================================== -->
-  <div class="customizer-modal" id="customizer-modal" role="dialog" aria-modal="true" aria-labelledby="customizer-title">
-    <div class="customizer-modal-content">
-      <div class="modal-header">
-        <h3 id="customizer-title">⚙️ Customize Invitation Details</h3>
-        <button class="modal-close-btn" id="close-customizer-btn" aria-label="Close modal">&times;</button>
+  <div class="agency-studio-modal" id="agency-studio-modal" role="dialog" aria-modal="true" aria-labelledby="studio-main-title">
+    <div class="agency-studio-window">
+      
+      <!-- Studio Header -->
+      <div class="studio-header">
+        <div class="studio-header-title">
+          <span style="font-size: 1.8rem;">👑</span>
+          <div>
+            <h2 id="studio-main-title">Royal Agency Studio</h2>
+            <p style="font-size: 0.78rem; color: var(--color-gold-bright);">Multi-Client Configurator &amp; White-Label Export Engine</p>
+          </div>
+          <span class="studio-badge">Agency Pro</span>
+        </div>
+        <button class="studio-close-btn" id="studio-close-modal-btn" aria-label="Close Agency Studio">&times;</button>
       </div>
 
-      <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1rem;">
-        Change the names, parents, dates, venues, or WhatsApp RSVP number directly. Changes are saved instantly!
-      </p>
-
-      <div class="form-group">
-        <label class="form-label" for="edit-groom-name">Groom's Name</label>
-        <input type="text" id="edit-groom-name" class="form-input" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="edit-bride-name">Bride's Name</label>
-        <input type="text" id="edit-bride-name" class="form-input" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="edit-groom-parents">Groom's Parents (Hosts)</label>
-        <input type="text" id="edit-groom-parents" class="form-input" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="edit-bride-parents">Bride's Parents (Hosts)</label>
-        <input type="text" id="edit-bride-parents" class="form-input" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="edit-baraat-date">Baraat Date (Scratch Reveal)</label>
-        <input type="text" id="edit-baraat-date" class="form-input" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="edit-baraat-venue">Baraat Venue</label>
-        <input type="text" id="edit-baraat-venue" class="form-input" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="edit-whatsapp">Host WhatsApp Number (without +)</label>
-        <input type="text" id="edit-whatsapp" class="form-input" placeholder="e.g. 923001234567" />
-      </div>
-
-      <div class="modal-actions">
-        <button class="btn-gold" id="save-customizer-btn" style="flex: 2;">
-          💾 Save &amp; Apply Changes
+      <!-- Studio Tabs Navigation -->
+      <div class="studio-tabs-bar" role="tablist">
+        <button class="studio-tab-btn active" data-tab="tab-couple" role="tab">
+          <span>👥 Couple &amp; Hosts</span>
         </button>
-        <button class="btn-outline-gold" id="reset-customizer-btn" style="flex: 1;">
-          ↺ Reset
+        <button class="studio-tab-btn" data-tab="tab-events" role="tab">
+          <span>📅 Ceremonies</span>
+        </button>
+        <button class="studio-tab-btn" data-tab="tab-themes" role="tab">
+          <span>🎨 5 Themes</span>
+        </button>
+        <button class="studio-tab-btn" data-tab="tab-salami" role="tab">
+          <span>🧧 E-Salami</span>
+        </button>
+        <button class="studio-tab-btn" data-tab="tab-branding" role="tab">
+          <span>📢 Ads &amp; Branding</span>
+        </button>
+        <button class="studio-tab-btn" data-tab="tab-invite-gen" role="tab">
+          <span>💌 WhatsApp Invites</span>
         </button>
       </div>
+
+      <!-- Studio Body (Scrollable Tabs) -->
+      <div class="studio-tab-body">
+
+        <!-- TAB 1: COUPLE & HOSTS -->
+        <div class="studio-tab-pane active" id="tab-couple">
+          <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+            Edit the Bride and Groom names, host family details, and auspicious wedding verses:
+          </p>
+
+          <div class="studio-form-grid">
+            <div class="form-group">
+              <label class="form-label" for="studio-groom-name">Groom's Full Name *</label>
+              <input type="text" id="studio-groom-name" class="form-input" placeholder="e.g. Hamza Tariq" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-bride-name">Bride's Full Name *</label>
+              <input type="text" id="studio-bride-name" class="form-input" placeholder="e.g. Ayesha Farooq" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-groom-parents">Groom's Parents (Hosts)</label>
+              <input type="text" id="studio-groom-parents" class="form-input" placeholder="Mr. &amp; Mrs. Tariq Mahmood Khan" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-bride-parents">Bride's Parents (Hosts)</label>
+              <input type="text" id="studio-bride-parents" class="form-input" placeholder="Mr. &amp; Mrs. Farooq Ahmed Siddiqui" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-hashtag">Official Wedding Hashtag</label>
+              <input type="text" id="studio-hashtag" class="form-input" placeholder="#HamzaWedsAyesha" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-tagline">Wedding Tagline</label>
+              <input type="text" id="studio-tagline" class="form-input" placeholder="Cordially Invite You to Share in the Joy of Their Wedding" />
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: CEREMONIES & VENUES -->
+        <div class="studio-tab-pane" id="tab-events">
+          <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+            Customize dates, timings, venues, and dress codes for all 3 Pakistani wedding milestones:
+          </p>
+
+          <!-- Mehndi -->
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.25); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+            <h4 style="color: var(--color-gold-bright); margin-bottom: 0.75rem;">🟡 Mehndi &amp; Sangeet Night</h4>
+            <div class="studio-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="studio-mehndi-date">Date String</label>
+                <input type="text" id="studio-mehndi-date" class="form-input" placeholder="Wednesday, 16th December 2026" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studio-mehndi-time">Timing</label>
+                <input type="text" id="studio-mehndi-time" class="form-input" placeholder="07:30 PM Onwards" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studio-mehndi-venue">Venue Name &amp; City</label>
+                <input type="text" id="studio-mehndi-venue" class="form-input" placeholder="Haveli Marquee, Islamabad" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studio-mehndi-dress">Dress Code Advice</label>
+                <input type="text" id="studio-mehndi-dress" class="form-input" placeholder="Festive Saffron, Mustard Yellow &amp; Dholki Kurtas" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Baraat -->
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.25); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+            <h4 style="color: var(--color-gold-bright); margin-bottom: 0.75rem;">🔴 Grand Baraat &amp; Rukhsati (Scratch Reveal)</h4>
+            <div class="studio-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="studio-baraat-date">Date String (Revealed on Scratch Card)</label>
+                <input type="text" id="studio-baraat-date" class="form-input" placeholder="Friday, 18th December 2026" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studio-baraat-time">Timing</label>
+                <input type="text" id="studio-baraat-time" class="form-input" placeholder="08:00 PM Sharp" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studio-baraat-venue">Venue Name &amp; City</label>
+                <input type="text" id="studio-baraat-venue" class="form-input" placeholder="Serena Grand Ballrooms, Islamabad" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studio-baraat-dress">Dress Code Advice</label>
+                <input type="text" id="studio-baraat-dress" class="form-input" placeholder="Royal Crimson, Zari Formals &amp; Sherwanis" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Walima -->
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.25); border-radius: var(--radius-md); padding: 1.25rem;">
+            <h4 style="color: var(--color-gold-bright); margin-bottom: 0.75rem;">⚪ Walima Grand Reception</h4>
+            <div class="studio-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="studio-walima-date">Date String</label>
+                <input type="text" id="studio-walima-date" class="form-input" placeholder="Sunday, 20th December 2026" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studio-walima-time">Timing</label>
+                <input type="text" id="studio-walima-time" class="form-input" placeholder="08:00 PM Onwards" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studio-walima-venue">Venue Name &amp; City</label>
+                <input type="text" id="studio-walima-venue" class="form-input" placeholder="Islamabad Club Grand Lawns" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="studio-walima-dress">Dress Code Advice</label>
+                <input type="text" id="studio-walima-dress" class="form-input" placeholder="Formal Suits, Pastels &amp; Chic Elegance" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: 5 COLOR THEMES -->
+        <div class="studio-tab-pane" id="tab-themes">
+          <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 0.5rem;">
+            Select one of 5 Royal Pakistani color themes. The entire website palette, cards, and glows adapt instantly:
+          </p>
+
+          <div class="theme-selector-grid">
+
+            <!-- Theme 1: Crimson & Gold -->
+            <div class="theme-card-option active" data-theme-id="theme-crimson">
+              <div class="theme-swatch-circles">
+                <span class="theme-circle" style="background: #6E1224;"></span>
+                <span class="theme-circle" style="background: #D4AF37;"></span>
+                <span class="theme-circle" style="background: #20040A;"></span>
+              </div>
+              <div class="theme-card-name">🍷 Royal Crimson</div>
+              <div class="theme-card-desc">Shah Jahan Palace (Default)</div>
+            </div>
+
+            <!-- Theme 2: Emerald & Brass -->
+            <div class="theme-card-option" data-theme-id="theme-emerald">
+              <div class="theme-swatch-circles">
+                <span class="theme-circle" style="background: #094731;"></span>
+                <span class="theme-circle" style="background: #D4AF37;"></span>
+                <span class="theme-circle" style="background: #02120B;"></span>
+              </div>
+              <div class="theme-card-name">🌿 Zamarrud Emerald</div>
+              <div class="theme-card-desc">Shalimar Garden Jade</div>
+            </div>
+
+            <!-- Theme 3: Sapphire Navy & Silver -->
+            <div class="theme-card-option" data-theme-id="theme-navy">
+              <div class="theme-swatch-circles">
+                <span class="theme-circle" style="background: #112D57;"></span>
+                <span class="theme-circle" style="background: #F5D77F;"></span>
+                <span class="theme-circle" style="background: #020710;"></span>
+              </div>
+              <div class="theme-card-name">🌌 Sapphire Midnight</div>
+              <div class="theme-card-desc">Noor-e-Aasman Royal</div>
+            </div>
+
+            <!-- Theme 4: Rani Pink -->
+            <div class="theme-card-option" data-theme-id="theme-pink">
+              <div class="theme-swatch-circles">
+                <span class="theme-circle" style="background: #A31868;"></span>
+                <span class="theme-circle" style="background: #F5D77F;"></span>
+                <span class="theme-circle" style="background: #12020B;"></span>
+              </div>
+              <div class="theme-card-name">🌸 Rani Pink</div>
+              <div class="theme-card-desc">Gulabi Jashn Festive</div>
+            </div>
+
+            <!-- Theme 5: Saffron & Terracotta -->
+            <div class="theme-card-option" data-theme-id="theme-saffron">
+              <div class="theme-swatch-circles">
+                <span class="theme-circle" style="background: #E69500;"></span>
+                <span class="theme-circle" style="background: #6E4107;"></span>
+                <span class="theme-circle" style="background: #120A01;"></span>
+              </div>
+              <div class="theme-card-name">🏵️ Saffron Marigold</div>
+              <div class="theme-card-desc">Jashn-e-Bahar Amber</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TAB 4: E-SALAMI LIFAFA -->
+        <div class="studio-tab-pane" id="tab-salami">
+          <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+            Configure the Digital Shagun accounts for overseas and tech-savvy guests:
+          </p>
+
+          <div class="studio-form-grid">
+            <div class="form-group">
+              <label class="form-label" for="studio-raast-id">Raast ID / Registered Mobile</label>
+              <input type="text" id="studio-raast-id" class="form-input" placeholder="03332568818" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-raast-title">Raast Account Title</label>
+              <input type="text" id="studio-raast-title" class="form-input" placeholder="Muhammad Tariq Khan" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-wallet-no">JazzCash / EasyPaisa Number</label>
+              <input type="text" id="studio-wallet-no" class="form-input" placeholder="03332568818" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-wallet-title">Wallet Account Title</label>
+              <input type="text" id="studio-wallet-title" class="form-input" placeholder="Hamza Tariq" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-bank-iban">Bank Name &amp; Full IBAN</label>
+              <input type="text" id="studio-bank-iban" class="form-input" placeholder="PK64ALFH0001001004812345" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-bank-title">Bank Account Title</label>
+              <input type="text" id="studio-bank-title" class="form-input" placeholder="Hamza Tariq (Groom)" />
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: AGENCY ADS & BRANDING -->
+        <div class="studio-tab-pane" id="tab-branding">
+          <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+            Run ads and get new wedding clients automatically! When guests open this website, they can tap to order their own website from you on WhatsApp:
+          </p>
+
+          <div class="studio-form-grid">
+            <div class="form-group">
+              <label class="form-label" for="studio-agency-name">Your Agency / Studio Brand Name</label>
+              <input type="text" id="studio-agency-name" class="form-input" placeholder="Royal Nikah Digital Studio" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-agency-whatsapp">Your WhatsApp Number For Inquiries &amp; Orders (Without +)</label>
+              <input type="text" id="studio-agency-whatsapp" class="form-input" placeholder="923332568818" />
+            </div>
+
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label" for="studio-agency-badge-toggle">Viral Lead Generation Badge &amp; Footer Ad</label>
+              <select id="studio-agency-badge-toggle" class="form-select">
+                <option value="enabled">Show Referral Badge &amp; Footer Order Ad (Recommended for Social Media Ads)</option>
+                <option value="disabled">100% White-Label (Hide Agency Ads for Premium VIP Clients)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 6: WHATSAPP INVITE GENERATOR -->
+        <div class="studio-tab-pane" id="tab-invite-gen">
+          <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 1rem;">
+            Generate ready-to-send Urdu &amp; English WhatsApp invitation messages with the guest's personalized URL:
+          </p>
+
+          <div class="studio-form-grid" style="margin-bottom: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="studio-gen-guest-name">Guest Name / Family Name</label>
+              <input type="text" id="studio-gen-guest-name" class="form-input" placeholder="e.g. Chacha Aslam &amp; Family / Dr. Salman" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="studio-gen-side">Family Side Perspective</label>
+              <select id="studio-gen-side" class="form-select">
+                <option value="groom">لڑکے والے (Groom's Side)</option>
+                <option value="bride">لڑکی والے (Bride's Side)</option>
+                <option value="combined" selected>مشترکہ دعوت (Combined Families)</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn-gold" id="studio-btn-generate-wa" style="margin-bottom: 1rem;">
+            ⚡ Generate Personalized WhatsApp Message
+          </button>
+
+          <div class="form-group">
+            <label class="form-label" for="studio-gen-output">Generated WhatsApp Invitation Text</label>
+            <textarea id="studio-gen-output" class="form-textarea" rows="5" readonly style="font-size: 0.85rem; font-family: monospace;"></textarea>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 0.5rem;">
+            <button class="btn-gold" id="studio-btn-copy-wa">
+              📋 Copy WhatsApp Text
+            </button>
+            <button class="btn-outline-gold" id="studio-btn-test-wa">
+              💬 Test Open in WhatsApp
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Studio Actions Footer -->
+      <div class="studio-actions-footer">
+        <div class="studio-actions-left">
+          <button class="btn-gold" id="studio-btn-save">
+            💾 Save &amp; Apply Live
+          </button>
+          <button class="btn-outline-gold" id="studio-btn-export" title="Download client-config.json file">
+            📥 Export Config (.JSON)
+          </button>
+          <button class="btn-outline-gold" id="studio-btn-import-trigger" title="Upload a client-config.json to immediately load client settings">
+            📤 Import Config (.JSON)
+          </button>
+          <input type="file" id="studio-file-input" accept=".json" style="display: none;" />
+        </div>
+
+        <div class="studio-actions-right">
+          <button class="btn-outline-gold" id="studio-btn-reset" style="color: #ff6b6b; border-color: rgba(255,107,107,0.4);" title="Restore original Hamza &amp; Ayesha data">
+            🔄 Reset Demo
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -773,3 +1320,4 @@
 
 </body>
 </html>
+

@@ -10,6 +10,10 @@ const DEFAULT_CONFIG = {
   brideParents: "Mr. & Mrs. Farooq Ahmed Siddiqui",
   whatsappNumber: "923001234567",
   weddingDate: "2026-12-18T20:00:00",
+  weddingHashtag: "#HamzaWedsAyesha",
+  weddingTagline: "Cordially Invite You to Share in the Joy of Their Wedding",
+  theme: "theme-crimson",
+  petalCount: 1348,
   events: {
     mehndi: {
       title: "رسمِ حنا — Mehndi & Sangeet",
@@ -35,6 +39,20 @@ const DEFAULT_CONFIG = {
       dressCode: "Black Tie / Classic Suits, Champagne Pastels & Chic Elegance",
       mapUrl: "https://maps.google.com/?q=Islamabad+Club"
     }
+  },
+  eSalami: {
+    enabled: true,
+    raastId: "0333-2568818",
+    raastTitle: "Muhammad Tariq Khan",
+    walletNo: "0333-2568818",
+    walletTitle: "Hamza Tariq",
+    bankIban: "PK64ALFH0001001004812345",
+    bankTitle: "Hamza Tariq (Groom)"
+  },
+  agency: {
+    agencyName: "Royal Nikah Digital Studio",
+    agencyWhatsapp: "923332568818",
+    badge: "enabled"
   }
 };
 
@@ -51,7 +69,17 @@ class RoyalWeddingApp {
   loadConfig() {
     try {
       const saved = localStorage.getItem('pak_royal_wedding_config');
-      return saved ? { ...DEFAULT_CONFIG, ...JSON.parse(saved) } : { ...DEFAULT_CONFIG };
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return {
+          ...DEFAULT_CONFIG,
+          ...parsed,
+          events: { ...DEFAULT_CONFIG.events, ...(parsed.events || {}) },
+          eSalami: { ...DEFAULT_CONFIG.eSalami, ...(parsed.eSalami || {}) },
+          agency: { ...DEFAULT_CONFIG.agency, ...(parsed.agency || {}) }
+        };
+      }
+      return { ...DEFAULT_CONFIG };
     } catch (e) {
       return { ...DEFAULT_CONFIG };
     }
@@ -101,7 +129,10 @@ class RoyalWeddingApp {
     this.initDholakWidget();
     this.initJootaChupaiGame();
     this.initDuasWall();
-    this.initCustomizerModal();
+    this.initPetalShower();
+    this.initShagunLifafa();
+    this.initRoyalGallery();
+    this.initAgencyStudio();
     this.initCalendarButtons();
     this.initShareButtons();
     this.initRoyalGuide();
@@ -115,14 +146,26 @@ class RoyalWeddingApp {
   }
 
   applyConfig() {
+    // 1. Theme application
+    const themeClass = this.config.theme || 'theme-crimson';
+    document.body.className = document.body.className.replace(/\btheme-\w+/g, '').trim();
+    document.body.classList.add(themeClass);
+
+    // 2. Names & Titles
     document.querySelectorAll('.groom-name-txt').forEach(el => el.textContent = this.config.groomName);
     document.querySelectorAll('.bride-name-txt').forEach(el => el.textContent = this.config.brideName);
 
     const heroTitle = document.getElementById('hero-couple-title');
     if (heroTitle) {
-      heroTitle.innerHTML = `<span class="royal-name">${this.config.groomName}</span> <span class="ampersand">&</span> <span class="royal-name">${this.config.brideName}</span>`;
+      heroTitle.innerHTML = `<span class="royal-name groom-name-txt">${this.config.groomName}</span> <span class="ampersand">&</span> <span class="royal-name bride-name-txt">${this.config.brideName}</span>`;
     }
 
+    const taglineEl = document.querySelector('.wedding-tagline');
+    if (taglineEl && this.config.weddingTagline) {
+      taglineEl.textContent = this.config.weddingTagline;
+    }
+
+    // 3. Events & Timings
     const events = this.config.events;
     if (events) {
       if (document.getElementById('event-mehndi-date')) document.getElementById('event-mehndi-date').textContent = events.mehndi.dateStr;
@@ -139,8 +182,61 @@ class RoyalWeddingApp {
     }
 
     const scratchDateEl = document.getElementById('scratch-revealed-date');
-    if (scratchDateEl) {
-      scratchDateEl.textContent = this.config.events.baraat.dateStr;
+    if (scratchDateEl && events && events.baraat) {
+      scratchDateEl.textContent = events.baraat.dateStr;
+    }
+
+    // 4. Digital Shagun / E-Salami
+    const es = this.config.eSalami;
+    if (es) {
+      const shagunSec = document.getElementById('step-shagun');
+      if (shagunSec) shagunSec.style.display = es.enabled ? 'block' : 'none';
+
+      if (document.getElementById('shagun-raast-val')) document.getElementById('shagun-raast-val').textContent = es.raastId;
+      if (document.getElementById('shagun-raast-title-val')) document.getElementById('shagun-raast-title-val').textContent = es.raastTitle;
+
+      if (document.getElementById('shagun-wallet-val')) document.getElementById('shagun-wallet-val').textContent = es.walletNo;
+      if (document.getElementById('shagun-wallet-title-val')) document.getElementById('shagun-wallet-title-val').textContent = es.walletTitle;
+
+      if (document.getElementById('shagun-iban-val')) document.getElementById('shagun-iban-val').textContent = es.bankIban;
+      if (document.getElementById('shagun-bank-title-val')) document.getElementById('shagun-bank-title-val').textContent = es.bankTitle;
+
+      const shagunWaBtn = document.getElementById('shagun-confirm-wa-btn');
+      if (shagunWaBtn) {
+        const groomFirstName = this.config.groomName.split(' ')[0];
+        const brideFirstName = this.config.brideName.split(' ')[0];
+        const waMsg = encodeURIComponent(`Assalam-o-Alaikum! We have sent our humble Shagun / Salami for ${groomFirstName} & ${brideFirstName}'s wedding with our heartfelt prayers. Shadi Mubarak! 💐`);
+        shagunWaBtn.href = `https://wa.me/${this.config.whatsappNumber}?text=${waMsg}`;
+      }
+    }
+
+    // 5. Agency Branding & Viral Referral
+    const ag = this.config.agency;
+    if (ag) {
+      const isBadgeActive = ag.badge === 'enabled';
+      const referralFloat = document.getElementById('agency-referral-float');
+      if (referralFloat) {
+        referralFloat.style.display = isBadgeActive ? 'inline-flex' : 'none';
+        const msg = encodeURIComponent(`Assalam-o-Alaikum! I saw this Royal 3D Wedding Website and want to order a custom website for my wedding. Please share packages.`);
+        referralFloat.href = `https://wa.me/${ag.agencyWhatsapp}?text=${msg}`;
+      }
+
+      const footerBanner = document.getElementById('agency-footer-banner');
+      if (footerBanner) {
+        footerBanner.style.display = isBadgeActive ? 'block' : 'none';
+      }
+
+      const footerWaBtn = document.getElementById('agency-footer-whatsapp-btn');
+      if (footerWaBtn) {
+        const msg = encodeURIComponent(`Assalam-o-Alaikum! I saw this Royal Wedding Website by ${ag.agencyName} and want to order one. Please share details.`);
+        footerWaBtn.href = `https://wa.me/${ag.agencyWhatsapp}?text=${msg}`;
+      }
+    }
+
+    // 6. Live Petal Counter
+    const countEl = document.getElementById('live-petal-count');
+    if (countEl) {
+      countEl.textContent = (this.config.petalCount || 1348).toLocaleString();
     }
   }
 
@@ -625,72 +721,419 @@ class RoyalWeddingApp {
     }
   }
 
-  initCustomizerModal() {
-    const modal = document.getElementById('customizer-modal');
-    const openBtn = document.getElementById('open-customizer-btn');
-    const closeBtn = document.getElementById('close-customizer-btn');
-    const saveBtn = document.getElementById('save-customizer-btn');
-    const resetBtn = document.getElementById('reset-customizer-btn');
+  // 1. Virtual Rose Petal Shower & Gulab Pash
+  initPetalShower() {
+    const showerBtn = document.getElementById('hero-petal-shower-btn');
+    const container = document.getElementById('petal-shower-layer');
+    if (!showerBtn || !container) return;
 
-    if (!modal || !openBtn) return;
+    showerBtn.addEventListener('click', () => {
+      // Spawn 28 fluttering petals
+      const varieties = ['rose-red', 'rose-dark', 'jasmine-white', 'marigold-gold'];
+      const count = 30;
 
-    const populateInputs = () => {
-      document.getElementById('edit-groom-name').value = this.config.groomName;
-      document.getElementById('edit-bride-name').value = this.config.brideName;
-      document.getElementById('edit-groom-parents').value = this.config.groomParents;
-      document.getElementById('edit-bride-parents').value = this.config.brideParents;
-      document.getElementById('edit-whatsapp').value = this.config.whatsappNumber;
-      document.getElementById('edit-baraat-date').value = this.config.events.baraat.dateStr;
-      document.getElementById('edit-baraat-venue').value = this.config.events.baraat.venue;
-    };
+      for (let i = 0; i < count; i++) {
+        const petal = document.createElement('div');
+        const variety = varieties[Math.floor(Math.random() * varieties.length)];
+        const leftPercent = Math.random() * 98;
+        const size = Math.floor(14 + Math.random() * 20);
+        const fallDuration = (3.2 + Math.random() * 2.8).toFixed(2);
+        const swayDuration = (1.5 + Math.random() * 1.5).toFixed(2);
+        const delay = (Math.random() * 0.8).toFixed(2);
 
-    openBtn.addEventListener('click', () => {
-      populateInputs();
-      modal.classList.add('open');
-      if (window.royalAudio) window.royalAudio.playBell();
-    });
+        petal.className = `falling-petal ${variety}`;
+        petal.style.left = `${leftPercent}vw`;
+        petal.style.width = `${size}px`;
+        petal.style.height = `${Math.floor(size * 1.25)}px`;
+        petal.style.animation = `petalFall ${fallDuration}s linear ${delay}s forwards, petalSway ${swayDuration}s ease-in-out infinite`;
 
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('open');
-    });
+        container.appendChild(petal);
 
-    saveBtn.addEventListener('click', () => {
-      const updated = {
-        groomName: document.getElementById('edit-groom-name').value.trim() || this.config.groomName,
-        brideName: document.getElementById('edit-bride-name').value.trim() || this.config.brideName,
-        groomParents: document.getElementById('edit-groom-parents').value.trim() || this.config.groomParents,
-        brideParents: document.getElementById('edit-bride-parents').value.trim() || this.config.brideParents,
-        whatsappNumber: document.getElementById('edit-whatsapp').value.trim() || this.config.whatsappNumber,
-        events: {
-          ...this.config.events,
-          baraat: {
-            ...this.config.events.baraat,
-            dateStr: document.getElementById('edit-baraat-date').value.trim() || this.config.events.baraat.dateStr,
-            venue: document.getElementById('edit-baraat-venue').value.trim() || this.config.events.baraat.venue
-          }
-        }
-      };
+        // Remove from DOM after falling completes
+        setTimeout(() => {
+          if (petal.parentNode) petal.parentNode.removeChild(petal);
+        }, (parseFloat(fallDuration) + parseFloat(delay) + 0.5) * 1000);
+      }
 
-      this.saveConfig(updated);
-      this.updateSideContent();
-      modal.classList.remove('open');
+      // Increment live persistent counter
+      this.config.petalCount = (this.config.petalCount || 1348) + 1;
+      localStorage.setItem('pak_royal_wedding_config', JSON.stringify(this.config));
+      const counterEl = document.getElementById('live-petal-count');
+      if (counterEl) {
+        counterEl.textContent = this.config.petalCount.toLocaleString();
+      }
 
       if (window.royalAudio) {
-        window.royalAudio.playCelebrationChime();
+        window.royalAudio.playPetalSound();
       }
-      alert("✨ Royal Wedding Invitation details updated successfully!");
+    });
+  }
+
+  // 2. Digital Shagun / E-Salami Lifafa Copy Controller
+  initShagunLifafa() {
+    const copyBtns = document.querySelectorAll('[data-copy-target]');
+    copyBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.copyTarget;
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        const textToCopy = targetEl.textContent.trim();
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const originalText = btn.innerHTML;
+          btn.innerHTML = 'کاپی ہو گیا! ✓';
+          btn.classList.add('copied');
+
+          if (window.royalAudio) {
+            window.royalAudio.playCoinDrop();
+          }
+
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.classList.remove('copied');
+          }, 2200);
+        }).catch(err => {
+          console.error('Copy error:', err);
+        });
+      });
+    });
+  }
+
+  // 3. Royal Photo Gallery Lightbox
+  initRoyalGallery() {
+    const cards = document.querySelectorAll('.gallery-card');
+    const modal = document.getElementById('gallery-lightbox-modal');
+    const imgEl = document.getElementById('lightbox-img');
+    const capEl = document.getElementById('lightbox-caption');
+    const closeBtn = document.getElementById('lightbox-close-btn');
+
+    if (!modal || !imgEl) return;
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const imgSrc = card.dataset.img;
+        const caption = card.dataset.caption;
+        imgEl.src = imgSrc;
+        imgEl.alt = caption || 'Wedding Photo Preview';
+        if (capEl) capEl.textContent = caption || '';
+        modal.classList.add('active');
+        if (window.royalAudio) window.royalAudio.playBell();
+      });
     });
 
-    resetBtn.addEventListener('click', () => {
-      if (confirm("Reset invitation details back to original defaults?")) {
-        localStorage.removeItem('pak_royal_wedding_config');
-        this.config = { ...DEFAULT_CONFIG };
-        this.applyConfig();
-        this.updateSideContent();
-        populateInputs();
-        modal.classList.remove('open');
-      }
+    const closeModal = () => modal.classList.remove('active');
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
     });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
+  }
+
+  // 4. Agency Studio & Client Configurator Panel
+  initAgencyStudio() {
+    const modal = document.getElementById('agency-studio-modal');
+    const openBtns = [
+      document.getElementById('open-customizer-btn'),
+      document.getElementById('top-open-agency-btn')
+    ].filter(Boolean);
+    const closeBtn = document.getElementById('studio-close-modal-btn');
+    const saveBtn = document.getElementById('studio-btn-save');
+    const exportBtn = document.getElementById('studio-btn-export');
+    const importTrigger = document.getElementById('studio-btn-import-trigger');
+    const fileInput = document.getElementById('studio-file-input');
+    const resetBtn = document.getElementById('studio-btn-reset');
+    const tabBtns = document.querySelectorAll('.studio-tab-btn');
+    const themeCards = document.querySelectorAll('.theme-card-option');
+
+    if (!modal) return;
+
+    // Populates inputs with active config
+    const populateFields = () => {
+      const setVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.value = val || '';
+      };
+
+      setVal('studio-groom-name', this.config.groomName);
+      setVal('studio-bride-name', this.config.brideName);
+      setVal('studio-groom-parents', this.config.groomParents);
+      setVal('studio-bride-parents', this.config.brideParents);
+      setVal('studio-hashtag', this.config.weddingHashtag);
+      setVal('studio-tagline', this.config.weddingTagline);
+
+      const ev = this.config.events || {};
+      if (ev.mehndi) {
+        setVal('studio-mehndi-date', ev.mehndi.dateStr);
+        setVal('studio-mehndi-time', ev.mehndi.time);
+        setVal('studio-mehndi-venue', ev.mehndi.venue);
+        setVal('studio-mehndi-dress', ev.mehndi.dressCode);
+      }
+      if (ev.baraat) {
+        setVal('studio-baraat-date', ev.baraat.dateStr);
+        setVal('studio-baraat-time', ev.baraat.time);
+        setVal('studio-baraat-venue', ev.baraat.venue);
+        setVal('studio-baraat-dress', ev.baraat.dressCode);
+      }
+      if (ev.walima) {
+        setVal('studio-walima-date', ev.walima.dateStr);
+        setVal('studio-walima-time', ev.walima.time);
+        setVal('studio-walima-venue', ev.walima.venue);
+        setVal('studio-walima-dress', ev.walima.dressCode);
+      }
+
+      const es = this.config.eSalami || {};
+      setVal('studio-raast-id', es.raastId);
+      setVal('studio-raast-title', es.raastTitle);
+      setVal('studio-wallet-no', es.walletNo);
+      setVal('studio-wallet-title', es.walletTitle);
+      setVal('studio-bank-iban', es.bankIban);
+      setVal('studio-bank-title', es.bankTitle);
+
+      const ag = this.config.agency || {};
+      setVal('studio-agency-name', ag.agencyName);
+      setVal('studio-agency-whatsapp', ag.agencyWhatsapp);
+      setVal('studio-agency-badge-toggle', ag.badge);
+
+      // Highlight active theme
+      const currentTheme = this.config.theme || 'theme-crimson';
+      themeCards.forEach(c => {
+        c.classList.toggle('active', c.dataset.themeId === currentTheme);
+      });
+    };
+
+    // Open Modal Function
+    this.openAgencyStudio = () => {
+      populateFields();
+      modal.classList.add('active');
+      if (window.royalAudio) window.royalAudio.playBell();
+    };
+
+    const closeModal = () => modal.classList.remove('active');
+    this.closeAgencyStudio = closeModal;
+
+    openBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.openAgencyStudio();
+      });
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Tab Switching
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const targetTabId = btn.dataset.tab;
+        document.querySelectorAll('.studio-tab-pane').forEach(p => {
+          p.classList.toggle('active', p.id === targetTabId);
+        });
+        if (window.royalAudio) window.royalAudio.playBell();
+      });
+    });
+
+    // Theme Cards Click (Live Instant Preview)
+    themeCards.forEach(card => {
+      card.addEventListener('click', () => {
+        themeCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        const themeId = card.dataset.themeId;
+        this.config.theme = themeId;
+        document.body.className = document.body.className.replace(/\btheme-\w+/g, '').trim();
+        document.body.classList.add(themeId);
+        if (window.royalAudio) window.royalAudio.playBell();
+      });
+    });
+
+    // Save & Apply Live Button
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        const getVal = (id, fallback) => {
+          const el = document.getElementById(id);
+          return el ? el.value.trim() : fallback;
+        };
+
+        const updated = {
+          groomName: getVal('studio-groom-name', this.config.groomName),
+          brideName: getVal('studio-bride-name', this.config.brideName),
+          groomParents: getVal('studio-groom-parents', this.config.groomParents),
+          brideParents: getVal('studio-bride-parents', this.config.brideParents),
+          weddingHashtag: getVal('studio-hashtag', this.config.weddingHashtag),
+          weddingTagline: getVal('studio-tagline', this.config.weddingTagline),
+          theme: this.config.theme || 'theme-crimson',
+          events: {
+            ...this.config.events,
+            mehndi: {
+              ...this.config.events.mehndi,
+              dateStr: getVal('studio-mehndi-date', this.config.events.mehndi.dateStr),
+              time: getVal('studio-mehndi-time', this.config.events.mehndi.time),
+              venue: getVal('studio-mehndi-venue', this.config.events.mehndi.venue),
+              dressCode: getVal('studio-mehndi-dress', this.config.events.mehndi.dressCode)
+            },
+            baraat: {
+              ...this.config.events.baraat,
+              dateStr: getVal('studio-baraat-date', this.config.events.baraat.dateStr),
+              time: getVal('studio-baraat-time', this.config.events.baraat.time),
+              venue: getVal('studio-baraat-venue', this.config.events.baraat.venue),
+              dressCode: getVal('studio-baraat-dress', this.config.events.baraat.dressCode)
+            },
+            walima: {
+              ...this.config.events.walima,
+              dateStr: getVal('studio-walima-date', this.config.events.walima.dateStr),
+              time: getVal('studio-walima-time', this.config.events.walima.time),
+              venue: getVal('studio-walima-venue', this.config.events.walima.venue),
+              dressCode: getVal('studio-walima-dress', this.config.events.walima.dressCode)
+            }
+          },
+          eSalami: {
+            ...this.config.eSalami,
+            raastId: getVal('studio-raast-id', this.config.eSalami.raastId),
+            raastTitle: getVal('studio-raast-title', this.config.eSalami.raastTitle),
+            walletNo: getVal('studio-wallet-no', this.config.eSalami.walletNo),
+            walletTitle: getVal('studio-wallet-title', this.config.eSalami.walletTitle),
+            bankIban: getVal('studio-bank-iban', this.config.eSalami.bankIban),
+            bankTitle: getVal('studio-bank-title', this.config.eSalami.bankTitle)
+          },
+          agency: {
+            ...this.config.agency,
+            agencyName: getVal('studio-agency-name', this.config.agency.agencyName),
+            agencyWhatsapp: getVal('studio-agency-whatsapp', this.config.agency.agencyWhatsapp),
+            badge: getVal('studio-agency-badge-toggle', this.config.agency.badge)
+          }
+        };
+
+        this.saveConfig(updated);
+        this.updateSideContent();
+        closeModal();
+
+        if (window.royalAudio) {
+          window.royalAudio.playCelebrationChime();
+        }
+        alert("✨ Client configuration saved & applied live! Ready for client delivery.");
+      });
+    }
+
+    // 1-Click Export to JSON File
+    if (exportBtn) {
+      exportBtn.addEventListener('click', () => {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.config, null, 2));
+        const downloadAnchor = document.createElement('a');
+        const fileName = `client-config-${(this.config.groomName.split(' ')[0] || 'groom')}-${(this.config.brideName.split(' ')[0] || 'bride')}.json`.toLowerCase();
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", fileName);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+
+        if (window.royalAudio) window.royalAudio.playBell();
+      });
+    }
+
+    // 1-Click Import from JSON File
+    if (importTrigger && fileInput) {
+      importTrigger.addEventListener('click', () => fileInput.click());
+
+      fileInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const importedConfig = JSON.parse(event.target.result);
+            this.saveConfig(importedConfig);
+            this.updateSideContent();
+            populateFields();
+            closeModal();
+
+            if (window.royalAudio) window.royalAudio.playCelebrationChime();
+            alert("🎉 Client config loaded successfully! The website is now customized for this client.");
+          } catch (err) {
+            alert("⚠️ Invalid JSON file format. Please check the file.");
+          }
+        };
+        reader.readAsText(file);
+      });
+    }
+
+    // Reset to Demo Button
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (confirm("Restore original Hamza & Ayesha demo configuration?")) {
+          localStorage.removeItem('pak_royal_wedding_config');
+          this.config = { ...DEFAULT_CONFIG };
+          this.applyConfig();
+          this.updateSideContent();
+          populateFields();
+          closeModal();
+          if (window.royalAudio) window.royalAudio.playCelebrationChime();
+        }
+      });
+    }
+
+    // WhatsApp Invitation Message Generator
+    const genBtn = document.getElementById('studio-btn-generate-wa');
+    const copyWaBtn = document.getElementById('studio-btn-copy-wa');
+    const testWaBtn = document.getElementById('studio-btn-test-wa');
+    const outputEl = document.getElementById('studio-gen-output');
+
+    if (genBtn && outputEl) {
+      genBtn.addEventListener('click', () => {
+        const guestName = (document.getElementById('studio-gen-guest-name').value || 'معزز مہمانِ خاص').trim();
+        const side = document.getElementById('studio-gen-side').value;
+        const currentUrl = window.location.origin + window.location.pathname;
+        const personalUrl = `${currentUrl}?guest=${encodeURIComponent(guestName)}&side=${side}`;
+
+        const msg = 
+`بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ ✨
+السلام علیکم!
+
+محترم و مکرم جناب / محترمہ: *${guestName}*
+
+اللہ تعالیٰ کے فضل و کرم سے *${this.config.groomName}* اور *${this.config.brideName}* کی شادی مبارک کا شاہی دعوت نامہ پیشِ خدمت ہے:
+
+👑 *شاہی 3D ڈیجیٹل دعوت نامہ (Royal Dawat-Nama):*
+👉 ${personalUrl}
+
+✨ کارڈ کھولیں، مہر توڑیں، اور 24K گولڈ کو سکریچ کر کے تاریخ معلوم کریں!
+ہمیں آپ کی پرخلوص شرکت اور دعاؤں کا شدت سے انتظار رہے گا۔
+
+منجانب:
+${side === 'groom' ? this.config.groomParents : side === 'bride' ? this.config.brideParents : `${this.config.groomParents} & ${this.config.brideParents}`}`;
+
+        outputEl.value = msg;
+        if (window.royalAudio) window.royalAudio.playBell();
+      });
+
+      if (copyWaBtn) {
+        copyWaBtn.addEventListener('click', () => {
+          if (!outputEl.value) {
+            genBtn.click();
+          }
+          navigator.clipboard.writeText(outputEl.value).then(() => {
+            const orig = copyWaBtn.innerHTML;
+            copyWaBtn.innerHTML = 'کاپی ہو گیا! ✓';
+            setTimeout(() => { copyWaBtn.innerHTML = orig; }, 2000);
+            if (window.royalAudio) window.royalAudio.playBell();
+          });
+        });
+      }
+
+      if (testWaBtn) {
+        testWaBtn.addEventListener('click', () => {
+          if (!outputEl.value) {
+            genBtn.click();
+          }
+          window.open(`https://wa.me/?text=${encodeURIComponent(outputEl.value)}`, '_blank');
+        });
+      }
+    }
   }
 
   initCalendarButtons() {
@@ -761,7 +1204,9 @@ class RoyalWeddingApp {
       { id: 'step-events', stepNum: 5, label: 'تینوں تقریبات (Ceremonies)', msg: 'Mehndi, Baraat aur Walima kay timings, venues, dress codes aur maps check karein!' },
       { id: 'step-dholak', stepNum: 6, label: 'شادی ڈھولک (Shadi Dholak)', msg: "'Luddi' ya 'Bhangra' dhol beat on karein aur drum heads par tap karein!" },
       { id: 'step-joota', stepNum: 7, label: 'جوتا چھپائی (Bargaining Fun)', msg: 'Slider drag karein aur Saaliyan vs Dulhay kay Dost kay mazahiya dialogues dekhein!' },
-      { id: 'step-duas', stepNum: 8, label: 'مبارکباد اور دعا (Duas Wall)', msg: 'Dulha aur Dulhan kay liye apni Dua & Mubarakbaad WhatsApp pr send karein!' }
+      { id: 'step-duas', stepNum: 8, label: 'مبارکباد اور دعا (Duas Wall)', msg: 'Dulha aur Dulhan kay liye apni Dua & Mubarakbaad WhatsApp pr send karein!' },
+      { id: 'step-gallery', stepNum: 9, label: 'شاہی گیلری (Lookbook Gallery)', msg: 'Shahi tasweerein dekhein aur har taqreeb kay dress code colors check karein!' },
+      { id: 'step-shagun', stepNum: 10, label: 'ای-سلامی (Digital Shagun)', msg: 'Overseas aur door kay mehmaan yahan say ba-asani salami aur shagun bhej saktay hain!' }
     ];
 
     let currentStepIdx = 0;
