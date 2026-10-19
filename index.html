@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Royal Pakistani Wedding Invitation | Hamza &amp; Ayesha</title>
+
+  <!-- SEO & Social Sharing Meta Tags -->
+  <meta name="description" content="Official Royal Wedding Invitation of Hamza &amp; Ayesha. Open the 3D wax-sealed royal envelope, scratch the 24K gold card to reveal wedding dates, and join our celebrations." />
+  <meta name="keywords" content="Pakistani Wedding Invitation, Hamza and Ayesha, Mehndi, Baraat, Walima, Scratch Card Wedding Invite, Desi Wedding" />
+  <meta property="og:title" content="Royal Wedding Invitation • Hamza &amp; Ayesha" />
+  <meta property="og:description" content="Open the 3D wax-sealed envelope and scratch the golden card to reveal wedding dates!" />
+  <meta property="og:image" content="assets/images/hero_couple.jpg" />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Playfair Display, Cinzel Decorative, Amiri (Urdu/Arabic), Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Three.js CDN for 3D Background, Rings, Lanterns & Petals -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Three.js WebGL 3D Canvas Layer -->
+  <div id="scene-3d-container" aria-hidden="true"></div>
+
+  <!-- Top Festive Marigold (Genda Phool) Garland Bar -->
+  <div class="top-festive-garland"></div>
+
+  <!-- Floating Audio Player (Real Studio Wedding Shehnai & Sitar) -->
+  <div class="floating-audio-widget">
+    <div class="music-wave-bars" id="music-wave-indicator" title="Wedding Shehnai & Sitar Music Playing">
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+    </div>
+    <button class="music-btn" id="floating-music-btn" title="Toggle Wedding Music (Shehnai & Dholki)" aria-label="Toggle traditional wedding music">
+      🎵
+    </button>
+  </div>
+
+  <!-- Floating Quick Customizer (Edit Names & Dates) -->
+  <div class="floating-settings-widget">
+    <button class="settings-btn" id="open-customizer-btn" title="Customize Names, Dates & WhatsApp">
+      <span>⚙️ Edit Invite Details</span>
+    </button>
+  </div>
+
+  <!-- Main Website Content Wrapper -->
+  <div class="main-wrapper">
+
+    <!-- ==========================================
+         HERO SECTION: 3D ROYAL PRESENTATION
+         ========================================== -->
+    <header class="hero-section">
+      <div class="container">
+        
+        <p class="bismillah-top">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+
+        <div class="mughal-crest-badge">
+          <span>✨ The Royal Nuptial Celebration ✨</span>
+        </div>
+
+        <h1 class="hero-couple-title" id="hero-couple-title">
+          <span class="royal-name groom-name-txt">Hamza Tariq</span>
+          <span class="ampersand">&amp;</span>
+          <span class="royal-name bride-name-txt">Ayesha Farooq</span>
+        </h1>
+
+        <p class="wedding-tagline">Cordially Invite You to Share in the Joy of Their Wedding</p>
+
+        <!-- 3D Royal Wax-Sealed Envelope Opening Experience -->
+        <div class="envelope-experience-section">
+          <div class="envelope-3d-stage">
+            <div class="royal-3d-envelope" id="royal-3d-envelope" title="Click to break the wax seal and open the royal invitation">
+              
+              <!-- 3D Wax Seal Stamp -->
+              <div class="wax-seal-center" id="envelope-wax-seal">
+                <img src="assets/images/royal_wax_seal.jpg" alt="Mughal Royal Wax Seal" />
+              </div>
+
+              <!-- 3D Top Flap -->
+              <div class="envelope-flap-top"></div>
+
+              <!-- Inner Card Slide Out -->
+              <div class="envelope-inner-card">
+                <p class="bismillah-calligraphy" style="font-size: 1.6rem; margin-bottom: 0.5rem;">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+                <p style="font-family: var(--font-display-mughal); color: var(--color-gold-bright); font-size: 1.1rem; letter-spacing: 2px;">
+                  DAWAT-NAMA UNVEILED
+                </p>
+                <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-top: 0.5rem;">
+                  Scroll down to explore ceremonies, scratch to reveal wedding dates, and send your Duas!
+                </p>
+              </div>
+
+              <!-- Tap Prompt -->
+              <div class="envelope-prompt-text">
+                <span>✨ Tap Wax Seal to Open Invitation ✨</span>
+                <span class="envelope-prompt-urdu">مہر توڑیں اور شاہی دعوت نامہ کھولیں</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D Tilt Visual Banner of Bride & Groom -->
+        <div class="hero-visual-frame" data-3d-tilt style="margin-top: 2.5rem;">
+          <div class="card-glare"></div>
+          <img src="assets/images/hero_couple.jpg" alt="Hamza and Ayesha - Royal Pakistani Wedding Couple" loading="eager" />
+          <div class="frame-overlay">
+            <p class="frame-duas-arabic">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+            <p style="font-size: 0.95rem; color: var(--color-gold-bright);">
+              "May Allah bless you, shower His blessings upon you, and unite you both in goodness."
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ==========================================
+         PERSONALIZED GUEST WELCOMER TOOL
+         ========================================== -->
+    <section class="guest-personalizer-section">
+      <div class="container">
+        <div class="guest-personalizer-card" data-3d-tilt>
+          <div class="card-glare"></div>
+          <h4>👑 Personalize This Invitation For Your Family</h4>
+          <p style="font-size: 0.9rem; color: var(--color-text-muted);">
+            Apna ya apnay khandan ka naam likhein taakay aap ka makhsoos Shahi Dawat-nama generate ho sake:
+          </p>
+          <div class="guest-personalizer-form">
+            <input type="text" id="guest-name-input" class="guest-personalizer-input" placeholder="e.g. Chacha Aslam &amp; Family / Dr. Salman" />
+            <button class="btn-gold" id="apply-guest-name-btn" style="flex: 0 0 auto;">
+              ✨ Personalize Card
+            </button>
+            <button class="btn-outline-gold" id="share-personal-card-btn" style="flex: 0 0 auto;">
+              📋 Copy My Link
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PERSPECTIVE SWITCHER: GROOM vs BRIDE SIDE
+         ========================================== -->
+    <section class="perspective-section" id="invitation-details">
+      <div class="container">
+        <div class="perspective-container">
+
+          <!-- Perspective Selector Tabs -->
+          <div class="side-selector-tabs" role="tablist">
+            <button class="side-tab-btn" data-side="groom" role="tab" aria-selected="false">
+              <span class="tab-urdu">لڑکے والے</span>
+              <span>Groom's Side</span>
+            </button>
+            <button class="side-tab-btn active" data-side="combined" role="tab" aria-selected="true">
+              <span class="tab-urdu">مشترکہ دعوت</span>
+              <span>Combined</span>
+            </button>
+            <button class="side-tab-btn" data-side="bride" role="tab" aria-selected="false">
+              <span class="tab-urdu">لڑکی والے</span>
+              <span>Bride's Side</span>
+            </button>
+          </div>
+
+          <!-- Royal Announcement Parchment Card -->
+          <div class="royal-announcement-card" data-3d-tilt>
+            <div class="card-glare"></div>
+
+            <!-- Mughal Corner Filigrees -->
+            <svg class="corner-ornament top-left" viewBox="0 0 100 100"><path d="M0,0 L100,0 C60,0 20,40 20,100 L0,100 Z"/></svg>
+            <svg class="corner-ornament top-right" viewBox="0 0 100 100"><path d="M0,0 L100,0 C60,0 20,40 20,100 L0,100 Z"/></svg>
+            <svg class="corner-ornament bottom-left" viewBox="0 0 100 100"><path d="M0,0 L100,0 C60,0 20,40 20,100 L0,100 Z"/></svg>
+            <svg class="corner-ornament bottom-right" viewBox="0 0 100 100"><path d="M0,0 L100,0 C60,0 20,40 20,100 L0,100 Z"/></svg>
+
+            <div style="text-align: center;">
+              <span class="side-active-badge" id="side-active-badge">مشترکہ دعوت • Combined Families Invitation</span>
+            </div>
+
+            <!-- Dynamic Announcement Content (Swapped by JS) -->
+            <div id="side-announcement-content">
+              <!-- Rendered via app.js -->
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SIGNATURE SCRATCH CARD: REVEAL WEDDING DATE
+         ========================================== -->
+    <section class="scratch-section" id="scratch-date-section">
+      <div class="container">
+
+        <div class="section-title-wrap">
+          <p class="section-pretitle">Interactive Royal Reveal</p>
+          <h2 class="section-title">✨ Reveal the Auspicious Wedding Dates ✨</h2>
+          <p class="section-subtitle">
+            Rub or scratch the 24K gold Mughal foil below with your finger or mouse to unlock the official wedding dates!
+          </p>
+        </div>
+
+        <!-- Scratch Canvas Card Container -->
+        <div class="scratch-card-wrapper" id="scratch-card-wrapper">
+
+          <!-- Secret Revealed Underlay -->
+          <div class="scratch-revealed-underlay" id="scratch-revealed-content">
+            <div class="mughal-crest-small">👑</div>
+            <p class="save-date-label">Save The Auspicious Date</p>
+            <h3 class="revealed-date-main" id="scratch-revealed-date">Friday, 18th December 2026</h3>
+            <p class="revealed-venue-txt">
+              <strong>Grand Baraat &amp; Rukhsati</strong> • Serena Grand Ballrooms, Islamabad
+            </p>
+            <p class="revealed-timing-txt">
+              Sehra Bandi: 07:30 PM | Arrival of Baraat: 08:30 PM | Dinner: 09:30 PM
+            </p>
+            <div style="margin-top: 1rem;">
+              <span style="font-size: 1.3rem;">🌹 💐 🪔 💍 🌹</span>
+            </div>
+          </div>
+
+          <!-- HTML5 Canvas Metallic Foil Layer -->
+          <canvas id="scratch-canvas"></canvas>
+
+        </div>
+
+        <!-- Scratch Progress & Instructions -->
+        <div class="scratch-tracker">
+          <p class="scratch-prompt" id="scratch-prompt">
+            🪙 <strong>Rub or scratch the gold card above</strong> to reveal the official wedding dates!
+          </p>
+          <div class="scratch-progress-bar">
+            <div class="scratch-bar-fill" id="scratch-bar-fill"></div>
+          </div>
+          <p class="scratch-percent">Foil Cleared: <span id="scratch-percent">0%</span></p>
+
+          <!-- Revealed Actions -->
+          <div class="scratch-revealed-actions" id="scratch-revealed-actions">
+            <button class="btn-gold" data-add-calendar="baraat">
+              📅 Add to Calendar
+            </button>
+            <a href="#duas-section" class="btn-gold">
+              💌 Send Mubarakbaad &amp; Dua
+            </a>
+            <button class="btn-outline-gold" id="scratch-reset-btn">
+              🔄 Scratch Again
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         LIVE ROYAL COUNTDOWN TIMER
+         ========================================== -->
+    <section class="countdown-section">
+      <div class="container">
+        <div class="countdown-box" data-3d-tilt>
+          <div class="card-glare"></div>
+          <p class="countdown-heading">⏳ Countdown to the Grand Baraat Celebration</p>
+          
+          <div class="countdown-grid">
+            <div class="countdown-unit">
+              <div class="countdown-number" id="count-days">00</div>
+              <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="count-hours">00</div>
+              <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="count-minutes">00</div>
+              <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="count-seconds">00</div>
+              <div class="countdown-label">Seconds</div>
+            </div>
+          </div>
+
+          <p class="countdown-status-text" id="countdown-status-text">
+            Counting down the cherished moments until we unite in celebration!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         3 CORE WEDDING CEREMONIES (EVENTS TIMELINE)
+         ========================================== -->
+    <section class="events-section" id="events-schedule">
+      <div class="container">
+
+        <div class="section-title-wrap" style="text-align: center;">
+          <p class="section-pretitle">Festivities &amp; Celebrations</p>
+          <h2 class="section-title">The Three Grand Ceremonies</h2>
+          <p class="section-subtitle">
+            Join us as we celebrate each joyous milestone of this Pakistani royal wedding.
+          </p>
+        </div>
+
+        <div class="events-grid">
+
+          <!-- EVENT 1: MEHNDI & SANGEET -->
+          <article class="event-card" data-3d-tilt>
+            <div class="card-glare"></div>
+            <div class="event-card-img-wrap">
+              <span class="event-badge mehndi">Day 01 • رسمِ حنا</span>
+              <img src="assets/images/mehndi_night.jpg" alt="Vibrant Pakistani Mehndi Night" loading="lazy" />
+            </div>
+            <div class="event-card-body">
+              <p class="event-title-urdu">رسمِ حنا و ڈھولکی</p>
+              <h3 class="event-title-en">Mehndi &amp; Sangeet Night</h3>
+
+              <ul class="event-meta-list">
+                <li class="event-meta-item">
+                  <span class="event-meta-icon">📅</span>
+                  <span id="event-mehndi-date">Wednesday, 16th December 2026</span>
+                </li>
+                <li class="event-meta-item">
+                  <span class="event-meta-icon">⏰</span>
+                  <span id="event-mehndi-time">07:30 PM Onwards</span>
+                </li>
+                <li class="event-meta-item">
+                  <span class="event-meta-icon">📍</span>
+                  <span id="event-mehndi-venue">Haveli Marquee, Gulberg Greens, Islamabad</span>
+                </li>
+              </ul>
+
+              <div class="event-dress-code">
+                <strong>👗 Dress Code:</strong> Festive Saffron, Mustard Yellow, Peacock Teal &amp; Traditional Dholki Kurtas
+              </div>
+
+              <div class="event-card-actions">
+                <a href="https://maps.google.com/?q=Islamabad" target="_blank" rel="noopener" class="btn-outline-gold">
+                  🗺️ View Map
+                </a>
+                <button class="btn-gold" data-add-calendar="mehndi">
+                  📅 Add to Cal
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- EVENT 2: GRAND BARAAT & RUKHSATI -->
+          <article class="event-card" data-3d-tilt>
+            <div class="card-glare"></div>
+            <div class="event-card-img-wrap">
+              <span class="event-badge baraat">Day 02 • بارات و رخصتی</span>
+              <img src="assets/images/baraat_stage.jpg" alt="Regal Pakistani Baraat Stage" loading="lazy" />
+            </div>
+            <div class="event-card-body">
+              <p class="event-title-urdu">بارات و رخصتی</p>
+              <h3 class="event-title-en">The Grand Baraat</h3>
+
+              <ul class="event-meta-list">
+                <li class="event-meta-item">
+                  <span class="event-meta-icon">📅</span>
+                  <span id="event-baraat-date">Friday, 18th December 2026</span>
+                </li>
+                <li class="event-meta-item">
+                  <span class="event-meta-icon">⏰</span>
+                  <span id="event-baraat-time">08:00 PM Sharp</span>
+                </li>
+                <li class="event-meta-item">
+                  <span class="event-meta-icon">📍</span>
+                  <span id="event-baraat-venue">Serena Grand Ballrooms, Club Road, Islamabad</span>
+                </li>
+              </ul>
+
+              <div class="event-dress-code">
+                <strong>👑 Dress Code:</strong> Royal Crimson, Zari Formals, Embroidered Sherwanis &amp; Luxury Lehengas
+              </div>
+
+              <div class="event-card-actions">
+                <a href="https://maps.google.com/?q=Serena+Hotel+Islamabad" target="_blank" rel="noopener" class="btn-outline-gold">
+                  🗺️ View Map
+                </a>
+                <button class="btn-gold" data-add-calendar="baraat">
+                  📅 Add to Cal
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- EVENT 3: WALIMA RECEPTION -->
+          <article class="event-card" data-3d-tilt>
+            <div class="card-glare"></div>
+            <div class="event-card-img-wrap">
+              <span class="event-badge walima">Day 03 • دعوتِ ولیمہ</span>
+              <img src="assets/images/walima_reception.jpg" alt="Sophisticated Pakistani Walima Reception Stage" loading="lazy" />
+            </div>
+            <div class="event-card-body">
+              <p class="event-title-urdu">دعوتِ ولیمہ</p>
+              <h3 class="event-title-en">Walima Grand Reception</h3>
+
+              <ul class="event-meta-list">
+                <li class="event-meta-item">
+                  <span class="event-meta-icon">📅</span>
+                  <span id="event-walima-date">Sunday, 20th December 2026</span>
+                </li>
+                <li class="event-meta-item">
+                  <span class="event-meta-icon">⏰</span>
+                  <span id="event-walima-time">08:00 PM Onwards</span>
+                </li>
+                <li class="event-meta-item">
+                  <span class="event-meta-icon">📍</span>
+                  <span id="event-walima-venue">Islamabad Club Grand Lawns, Murree Road, Islamabad</span>
+                </li>
+              </ul>
+
+              <div class="event-dress-code">
+                <strong>✨ Dress Code:</strong> Black Tie / Formal Suits, Elegant Pastels &amp; Modern Chic
+              </div>
+
+              <div class="event-card-actions">
+                <a href="https://maps.google.com/?q=Islamabad+Club" target="_blank" rel="noopener" class="btn-outline-gold">
+                  🗺️ View Map
+                </a>
+                <button class="btn-gold" data-add-calendar="walima">
+                  📅 Add to Cal
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         INTERACTIVE DHOLAK DRUM STATION (ڈھولک بجائیں)
+         ========================================== -->
+    <section class="dholak-section">
+      <div class="container">
+        <div class="dholak-container-card" data-3d-tilt>
+          <div class="card-glare"></div>
+          <p class="section-pretitle">Desi Shadi Beats</p>
+          <h3 style="font-family: var(--font-serif-royal); font-size: 2rem; color: var(--color-gold-bright); margin-bottom: 0.5rem;">
+            🥁 Interactive Shadi Dholak
+          </h3>
+          <p style="color: var(--color-text-muted); font-size: 0.95rem;">
+            Bayan (Deep Bass) aur Dayan (Crisp Treble) pr tap karein ya Luddi &amp; Bhangra beat on karein:
+          </p>
+
+          <div class="dholak-drum-interactive">
+            <div class="dholak-head bayan" id="dhol-bayan-head" title="Click or tap to play Bass (Bayan)">
+              <span class="dholak-head-title">بایاں</span>
+              <span class="dholak-head-sub">Deep Bass</span>
+            </div>
+            <div class="dholak-body-center">
+              <span>🥁 DHOLAK 🥁</span>
+            </div>
+            <div class="dholak-head dayan" id="dhol-dayan-head" title="Click or tap to play Treble (Dayan)">
+              <span class="dholak-head-title">دایاں</span>
+              <span class="dholak-head-sub">Crisp Treble</span>
+            </div>
+          </div>
+
+          <div class="dholak-presets">
+            <button class="btn-beat-preset" id="dhol-beat-luddi">💃 Real Luddi Dhol Beat</button>
+            <button class="btn-beat-preset" id="dhol-beat-bhangra">🔥 Real Bhangra Dhol Beat</button>
+            <button class="btn-beat-preset" id="dhol-beat-stop">⏹️ Stop Dhol</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         JOOTA CHUPAI NEGOTIATOR GAME (جوتا چھپائی فن)
+         ========================================== -->
+    <section class="joota-game-section">
+      <div class="container">
+        <div class="joota-game-card" data-3d-tilt>
+          <div class="card-glare"></div>
+          <p class="section-pretitle">Pakistani Shadi Tradition &amp; Fun</p>
+          <h3 style="font-family: var(--font-serif-royal); font-size: 1.9rem; color: var(--color-gold-bright);">
+            👠 Joota Chupai Negotiator
+          </h3>
+          <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-top: 0.3rem;">
+            Aap kis taraf hain? Dulhan ki saaliyan ya Dulhe kay dost? Bargain kar kay dekhein!
+          </p>
+
+          <div class="joota-camp-selector">
+            <button class="joota-side-choice active" data-camp="bride">
+              💃 Dulhan Ki Behnein / Saaliyan
+            </button>
+            <button class="joota-side-choice" data-camp="groom">
+              😎 Dulhe Kay Dost / Yaar
+            </button>
+          </div>
+
+          <div class="joota-slider-box">
+            <input type="range" id="joota-amount-slider" class="joota-slider" min="5000" max="100000" step="5000" value="45000" />
+            <div class="joota-amount-display" id="joota-amount-val">PKR 45,000</div>
+          </div>
+
+          <div class="joota-status-dialogue" id="joota-status-dialogue">
+            Loading traditional banter...
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         MUBARAKBAAD & DUAS WALL (DUAON KA TOHFA)
+         ========================================== -->
+    <section class="duas-section" id="duas-section">
+      <div class="container">
+
+        <div class="section-title-wrap" style="text-align: center;">
+          <p class="section-pretitle">Shadi Mubarakbaad</p>
+          <h2 class="section-title">🤲 Mubarakbaad &amp; Duas Wall</h2>
+          <p class="section-subtitle">
+            Dulha aur Dulhan ko apni dili duayein aur naik tamannayein bhejein:
+          </p>
+        </div>
+
+        <div class="duas-layout">
+
+          <!-- Send Dua Form -->
+          <div class="dua-form-card" data-3d-tilt>
+            <div class="card-glare"></div>
+            <h3 style="font-family: var(--font-serif-royal); font-size: 1.6rem; color: var(--color-gold-bright); margin-bottom: 1.5rem;">
+              💌 Send Your Blessings &amp; Dua
+            </h3>
+
+            <form id="wedding-dua-form">
+              <div class="form-group">
+                <label class="form-label" for="dua-name-input">Aap Ka Naam (Full Name) *</label>
+                <input type="text" id="dua-name-input" class="form-input" placeholder="e.g. Chacha Aslam &amp; Family / Dr. Salman" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="dua-side-input">Aap Ka Taluq (Family Side) *</label>
+                <select id="dua-side-input" class="form-select">
+                  <option value="groom">لڑکے والے (Groom's Side)</option>
+                  <option value="bride">لڑکی والے (Bride's Side)</option>
+                  <option value="combined">خاندان کے قریبی دوست (Family Friend)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="dua-message-input">Aap Ki Dua &amp; Naik Khwahishat *</label>
+                <textarea id="dua-message-input" class="form-textarea" placeholder="Naye joray kay liye apni dili dua aur mubarakbaad likhein..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-gold" style="width: 100%; padding: 14px; font-size: 1rem;">
+                📲 Send Dua to WhatsApp &amp; Pin to Wall
+              </button>
+
+              <div class="dua-success-banner" id="dua-success-banner">
+                🎉 Shukriya! Aap ki dua WhatsApp pr send ho chuki hai aur wall pr pin ho gayi hai!
+              </div>
+            </form>
+          </div>
+
+          <!-- Live Duas Wall Stream -->
+          <div class="duas-wall-container">
+            <div style="margin-bottom: 0.75rem;">
+              <h3 style="font-family: var(--font-serif-royal); font-size: 1.8rem; color: #FFF; margin-bottom: 0.25rem;">
+                💐 Family Duas &amp; Prayers
+              </h3>
+              <p style="font-size: 0.95rem; color: var(--color-text-muted);">
+                Aziz-o-Aqarib ki taraf say pyari duayein:
+              </p>
+            </div>
+
+            <div class="duas-wall-stream" id="duas-wall-cards">
+              <!-- Rendered via app.js -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SHARE INVITATION LINKS SECTION
+         ========================================== -->
+    <section class="share-section">
+      <div class="container">
+        <h3 style="font-family: var(--font-serif-royal); font-size: 1.6rem; color: var(--color-gold-bright); margin-bottom: 0.5rem;">
+          🔗 Share This Royal Invitation
+        </h3>
+        <p style="color: var(--color-text-muted); font-size: 0.95rem;">
+          Send the personalized invitation link directly to your loved ones on WhatsApp:
+        </p>
+
+        <div class="share-links-wrap">
+          <button class="btn-gold" id="share-whatsapp-btn">
+            💬 Share on WhatsApp
+          </button>
+          <button class="btn-outline-gold" id="share-groom-link">
+            📋 Copy Groom Side Link
+          </button>
+          <button class="btn-outline-gold" id="share-bride-link">
+            📋 Copy Bride Side Link
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="site-footer">
+      <div class="container">
+        <p class="footer-calligraphy">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+        <p style="margin-bottom: 0.5rem; color: var(--color-gold-light);">
+          With Compliments &amp; Warmest Regards from Both Families
+        </p>
+        <p style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.4);">
+          Khan &amp; Siddiqui Families • Islamabad, Pakistan
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ==========================================
+       QUICK CUSTOMIZER MODAL (EDIT NAMES & DATES)
+       ========================================== -->
+  <div class="customizer-modal" id="customizer-modal" role="dialog" aria-modal="true" aria-labelledby="customizer-title">
+    <div class="customizer-modal-content">
+      <div class="modal-header">
+        <h3 id="customizer-title">⚙️ Customize Invitation Details</h3>
+        <button class="modal-close-btn" id="close-customizer-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1rem;">
+        Change the names, parents, dates, venues, or WhatsApp RSVP number directly. Changes are saved instantly!
+      </p>
+
+      <div class="form-group">
+        <label class="form-label" for="edit-groom-name">Groom's Name</label>
+        <input type="text" id="edit-groom-name" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit-bride-name">Bride's Name</label>
+        <input type="text" id="edit-bride-name" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit-groom-parents">Groom's Parents (Hosts)</label>
+        <input type="text" id="edit-groom-parents" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit-bride-parents">Bride's Parents (Hosts)</label>
+        <input type="text" id="edit-bride-parents" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit-baraat-date">Baraat Date (Scratch Reveal)</label>
+        <input type="text" id="edit-baraat-date" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit-baraat-venue">Baraat Venue</label>
+        <input type="text" id="edit-baraat-venue" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit-whatsapp">Host WhatsApp Number (without +)</label>
+        <input type="text" id="edit-whatsapp" class="form-input" placeholder="e.g. 923001234567" />
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-gold" id="save-customizer-btn" style="flex: 2;">
+          💾 Save &amp; Apply Changes
+        </button>
+        <button class="btn-outline-gold" id="reset-customizer-btn" style="flex: 1;">
+          ↺ Reset
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/three-scene.js"></script>
+  <script src="assets/js/scratch-card.js"></script>
+  <script src="assets/js/app.js"></script>
+
+</body>
+</html>
